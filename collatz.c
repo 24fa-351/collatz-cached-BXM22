@@ -47,7 +47,7 @@ LRUCache* create_cache(int capacity) {
 
 
 
-int collatz_eq(int n, LRUCache* cache) //collatz equation
+int collatz_eq(int n) //collatz equation
 {   
 
     int cacheResult;
