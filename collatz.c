@@ -3,8 +3,54 @@
 #include <time.h>
 
 
-int collatz_eq(int n) //collatz equation
+#define CACHE_CAPACITY 1000
+#define HASH_TABLE_SIZE 100000
+
+typedef struct Node {  //Node
+    int key;
+    int value;
+    struct Node* prev;
+    struct Node* next;
+} Node;
+
+typedef struct { //data struct(hashmap) 
+    Node* head;
+    Node* tail;
+    int capacity;
+    int size;
+    Node* map[CACHE_CAPACITY]; 
+} LRUCache;
+
+Node* create_node(int key, int value){
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->key = key;
+    newNode->value = value;
+    newNode->prev = NULL;
+    newNode->next = NULL;
+    return newNode;
+}
+
+LRUCache* create_cache(int capacity) {
+    LRUCache* cache = (LRUCache*)malloc(sizeof(LRUCache));
+    cache->capacity = capacity;
+    cache->size = 0;
+    cache->head = NULL;
+    cache->tail = NULL;
+
+    for (int i = 0; i < CACHE_CAPACITY; i++) {
+        cache->map[i] = NULL;
+    }
+    return cache;
+}
+
+
+
+
+
+int collatz_eq(int n, LRUCache* cache) //collatz equation
 {   
+
+    int cacheResult;
     int steps = 0;
     while (n != 1) {
         if (n % 2 == 0) {
