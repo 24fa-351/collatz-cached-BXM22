@@ -10,7 +10,7 @@ typedef struct Node {  //Node
     struct Node* next;
 } Node;
 
-typedef struct { //data struct(hashmap) 
+typedef struct { //data struct
     Node* head;
     Node* tail;
     int capacity;
