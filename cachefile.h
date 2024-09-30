@@ -19,10 +19,15 @@ typedef struct { //data struct
 } LRUCache;
 
 Node* create_node(int key, int value);
+
 LRUCache* create_cache(int capacity);
+
 void move_to_front(LRUCache* cache, Node* node);
+
 void evict(LRUCache* cache);
+
 void insert(LRUCache* cache, int key, int value);
+
 int get(LRUCache* cache, int key);
 
 #endif
